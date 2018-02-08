@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container-view">
+    <swiper indicator-dots='true' autoplay='true' circular='true' bindchange='onBannerChanged' style="width:100%">
+        <block wx:for="{{banners}}" wx:key="imageUrl">
+            <swiper-item style="display:flex;align-items:center;">
+                 <image src="{{item.imageUrl}}" style="width:100%" mode="aspectFit" bindtap='onBannerClick'/> 
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
