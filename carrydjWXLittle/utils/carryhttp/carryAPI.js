@@ -164,7 +164,16 @@ var CarryAPI = CarryAPI || (function () {
           var path = '/sns/bindMobile1';
           CarryHttp.doGet(path,
             {
-              'loginUserId': userId
+              'loginUserId': userId,
+              'mobilePhone':'', // 手机号
+              'code': '', // 验证码
+              'snsUid': '', // 第三方唯一标识
+              'snsType': '', // 第三方登录类型.weixin,qq,weibo
+              'snsNickName': '', // 第三方昵称
+              'snsHeadPhoto': '', // 第三方头像
+              'terminalDef': '', // 终端程序名
+              'deviceKind': '', // 设备类型，ios或者android或者pc
+              'deviceId': '' // 设备ID
             },
             CarrySignJS.OldSign,
             callback);
