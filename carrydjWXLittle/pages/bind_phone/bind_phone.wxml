@@ -1,0 +1,21 @@
+<!--pages/bind_phone/bind_phone.wxml-->
+<view class="container-view">
+   <view class='binding'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="section section_gap">
+        <input placeholder="请输入手机号" class='bind-input' maxlength='11' type='number'>
+          <image src='../../images/bind_phone/bind-phone-icon-phone.png'></image>
+        </input>
+      </view>
+      <view class="section section_gap">
+        <input placeholder="请输入验证码" focus  class='bind-input bind-code' type='password'>
+          <image src='../../images/bind_phone/bind-phone-icon-password.png'></image>
+          <text class='get-code'>获取验证码</text>
+        </input>
+      </view>
+      <view class="btn-area">
+        <button formType="submit" class='btn-binding-submit'>绑定</button>
+      </view>
+    </form>
+   </view>
+</view>

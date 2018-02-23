@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index", 
+    "pages/bind_phone/bind_phone",
     "pages/index1/index",
     "pages/logs/logs",
     "pages/webpage/webpage"

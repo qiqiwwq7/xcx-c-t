@@ -1,0 +1,59 @@
+.container-view {
+  background: #fff;
+}
+.binding {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 76rpx;
+  padding-top: 250rpx;
+}
+.bind-input {
+  height: 72rpx;
+  border-bottom: 1rpx solid #b7b7b7;
+  line-height: 72rpx;
+  font-size: 26rpx;
+  margin-bottom: 26rpx;
+  padding-left: 37rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.bind-input image {
+  width: 22rpx; 
+  height: 22rpx; 
+  position: absolute;
+  left:0;
+  top:50%; 
+  margin-top: -11rpx;
+}
+.get-code {
+  position: absolute;
+  right: 0;
+  top:0;
+  color: #b7b7b7;
+}
+.btn-binding-submit {
+  background: #ff5e2d;
+  font-size: 28rpx;
+  color: #fff;
+}
+.bind-code {
+  padding-right: 170rpx;
+  margin-bottom: 50rpx;
+}
+/* .binding input {
+  width: 100%;
+  height: 72rpx;
+  border-bottom: 1rpx solid #b7b7b7;
+  line-height: 72rpx;
+  font-size: 26rpx;
+  margin-bottom: 26rpx;
+  padding-left: 37rpx;
+  box-sizing: border-box;
+}
+.binding input img {
+  width: 22rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-bottom: 11rpx;
+} */

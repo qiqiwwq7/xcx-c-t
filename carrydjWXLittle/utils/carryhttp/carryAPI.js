@@ -76,21 +76,24 @@ var CarryAPI = CarryAPI || (function () {
                 {
                     onSuccess(data) {
                         // console.log(data);
-                        if(util.isNullObj(data.userInfo)){
+                        if (util.isNullObj(data.userInfo)) {
+                            // wx.showModal({
+                            //     title: '请绑定手机',
+                            //     content: '需要绑定手机',
+                            // })
+                            wx.navigateTo({
+                                url: '/pages/bind_phone/bind_phone',
+                            })
+                        }else{
                             globalData.userInfo = data.userInfo;
                             commonData.loginUserId = data.userInfo.loginUserId;
                             commonData.token = data.userInfo.token;
 
-                            if(callback){
+                            if (callback) {
                                 callback.onSuccess(data);
                             }
-                        }else{
-                            //用户未绑定过手机号，跳转绑定
-                            wx.showModal({
-                                title: '请绑定手机',
-                                content: '需要绑定手机'
-                            })
                         }
+                        
                     },
                     onFail(err){
                         if (callback) {
@@ -153,7 +156,19 @@ var CarryAPI = CarryAPI || (function () {
             CarryHttp.doGet(path, params, CarrySignJS.OldSign, callback);
         },
 
-
+        /**
+         * 三方绑定 旧签名 
+         * :wangwenqi
+         */
+        bindPhone: function (userId, callback) {
+          var path = '/sns/bindMobile1';
+          CarryHttp.doGet(path,
+            {
+              'loginUserId': userId
+            },
+            CarrySignJS.OldSign,
+            callback);
+        },
     }
 
     return APIs;

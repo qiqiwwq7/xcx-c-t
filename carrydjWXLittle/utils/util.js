@@ -20,7 +20,8 @@ const formatNumber = n => {
  * jiangshunbin 2018-02-08
  */
 const isNullObj = obj =>{
-  return Object.getOwnPropertyNames(obj).length > 0;
+  return Object.getOwnPropertyNames(obj).length <= 0;
+//   return Object.keys(obj).length <= 0;
 } 
 
 module.exports = {

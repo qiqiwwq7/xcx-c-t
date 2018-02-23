@@ -160,19 +160,24 @@ var Http = Http || (function () {
 
         //读取缓存数据
         getCacheData: function(key){
-            //TODO
+            //TODO 接口读取缓存数据
         },
         //保存缓存数据
         setCacheData: function(key, data){
-            //TODO
+            //TODO 接口保存缓存数据
         },
 
         //构造UserAgent Header
         makeUserAgent: function(netType){
             var sysInfo = globalData.systemInfo;
-            var osVer = sysInfo.system.replace(commonData.deviceType, '');
-            osVer = osVer.replace(' ', '');
-            return `os:${commonData.deviceType};osVer:${osVer};deviceBrand:${sysInfo.brand};deviceId:${commonData.deviceId};resolvingPower:${sysInfo.screenHeight}*${sysInfo.screenWidth};appName:${commonData.terminalDef};appVersionCode:${commonData.versionCode};appVersionName:${commonData.appVersion};netType:${netType};userId:${commonData.loginUserId};`;
+            if (sysInfo) {
+                var osVer = sysInfo.system.replace(commonData.deviceType, '');
+                osVer = osVer.replace(' ', '');
+            
+                return `os:${commonData.deviceType};osVer:${osVer};deviceBrand:${sysInfo.brand};deviceId:${commonData.deviceId};resolvingPower:${sysInfo.screenHeight}*${sysInfo.screenWidth};appName:${commonData.terminalDef};appVersionCode:${commonData.versionCode};appVersionName:${commonData.appVersion};netType:${netType};userId:${commonData.loginUserId};`;
+            }
+
+            return '';
         },
 
         //解析数据(若指定了cacheKey，则缓存数据)
@@ -229,12 +234,19 @@ var Http = Http || (function () {
             } else if (1100 == code){ //app 必须升级，理论上浏览器端不会出现这个错误
                 msg = null; //对于一些特殊的错误，不需要吐司提示给用户
             } else if (401 == code){
-                msg = null;
-                //弹出登录窗口 TODO
+                // msg = null;
+                //弹出登录窗口 
+
+                //小程序里不能像app那样弹出登录窗口，只能让用户重新进入（进入时会触发登录）
+                msg = '当前登录已失效，请退出小程序后重新进入';
             }
 
             if(msg != null){
-                //TODO  吐司提示
+                // 吐司提示错误
+                wx.showToast({
+                    title: msg,
+                    duration: 2000
+                })
             }
         }
     }
