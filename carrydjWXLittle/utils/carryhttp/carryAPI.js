@@ -160,11 +160,10 @@ var CarryAPI = CarryAPI || (function () {
          * 三方绑定 旧签名 
          * :wangwenqi
          */
-        bindPhone: function (userId, callback) {
+        bindPhone: function (mobilePhone, code, snsUid, snsType, snsNickName, snsHeadPhoto, terminalDef, deviceKind, deviceId,callback) {
           var path = '/sns/bindMobile1';
           CarryHttp.doGet(path,
             {
-              'loginUserId': userId,
               'mobilePhone':'', // 手机号
               'code': '', // 验证码
               'snsUid': '', // 第三方唯一标识

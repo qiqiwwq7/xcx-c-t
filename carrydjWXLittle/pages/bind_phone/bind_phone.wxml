@@ -10,7 +10,7 @@
       <view class="section section_gap">
         <input placeholder="请输入验证码" focus  class='bind-input bind-code' type='password'>
           <image src='../../images/bind_phone/bind-phone-icon-password.png'></image>
-          <text class='get-code'>获取验证码</text>
+          <text class='get-code' bindtap='getCode'>获取验证码</text>
         </input>
       </view>
       <view class="btn-area">
@@ -18,4 +18,5 @@
       </view>
     </form>
    </view>
+   
 </view>
