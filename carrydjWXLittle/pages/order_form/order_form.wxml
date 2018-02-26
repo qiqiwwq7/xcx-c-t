@@ -1,0 +1,6 @@
+<!--pages/order_form/index.wxml-->
+<view class="btn-area">
+  <navigator url="" hover-class="navigator-hover">未完成</navigator>
+  <navigator url="" open-type="redirect" hover-class="other-navigator-hover">已完成</navigator>
+  <navigator url="" open-type="switchTab" hover-class="other-navigator-hover">异常单</navigator>
+</view>

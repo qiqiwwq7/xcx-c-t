@@ -7,5 +7,5 @@
             </swiper-item>
         </block>
     </swiper>
-
+    <navigator url='../bind_phone/bind_phone'>绑定页面</navigator>
 </view>

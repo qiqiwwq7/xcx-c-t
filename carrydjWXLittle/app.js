@@ -5,6 +5,10 @@ const commonData = require('/utils/commondata.js').commonData;
 var constants = require('/utils/constants.js');
 var globalData = require('/utils/global_data.js');
 // const util = require('/utils/util.js');
+// import wxValidate from '/utils/wxValidate'
+// App({
+//   wxValidate: (rules, messages) => new wxValidate(rules, messages)
+// })
 
 App({
   onLaunch: function () {

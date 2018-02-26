@@ -10,6 +10,9 @@ const commonData = require('/../commondata.js').commonData;
 const globalData = require('/../global_data.js');
 const util = require('/../util.js');
 
+console.log('***commonData', commonData);
+console.log('***globalData', globalData);
+
 var CarryAPI = CarryAPI || (function () {
     var APIs = {
         //登录，在这里统一处理userId，token以及其他用户个人信息的全局变量存储（而不是到页面去做这种逻辑处理）
@@ -74,26 +77,25 @@ var CarryAPI = CarryAPI || (function () {
                 },
                 null,
                 {
-                    onSuccess(data) {
-                        // console.log(data);
-                        if (util.isNullObj(data.userInfo)) {
-                            // wx.showModal({
-                            //     title: '请绑定手机',
-                            //     content: '需要绑定手机',
-                            // })
-                            wx.navigateTo({
-                                url: '/pages/bind_phone/bind_phone',
-                            })
-                        }else{
-                            globalData.userInfo = data.userInfo;
-                            commonData.loginUserId = data.userInfo.loginUserId;
-                            commonData.token = data.userInfo.token;
+                  onSuccess(data) {
+                      // console.log(data);
+                      if (util.isNullObj(data.userInfo)) {
+                          // wx.showModal({
+                          //     title: '请绑定手机',
+                          //     content: '需要绑定手机',
+                          // })
+                          wx.navigateTo({
+                              url: '/pages/bind_phone/bind_phone',
+                          })
+                      }else{
+                          globalData.userInfo = data.userInfo;
+                          commonData.loginUserId = data.userInfo.loginUserId;
+                          commonData.token = data.userInfo.token;
 
-                            if (callback) {
-                                callback.onSuccess(data);
-                            }
-                        }
-                        
+                          if (callback) {
+                              callback.onSuccess(data);
+                          }
+                      }
                     },
                     onFail(err){
                         if (callback) {
@@ -125,14 +127,14 @@ var CarryAPI = CarryAPI || (function () {
             var path = '/order/getByUserId';
             // CarryHttp.needCache = true;
             CarryHttp.doGet(path,
-                {
-                    'loginUserId': userId,
-                    'pageLastId': '1',
-                    'orderGroupCode': '',
-                    'pageSize': '20'
-                },
-                CarrySignJS.NewSign,
-                callback);
+              {
+                'loginUserId': userId,
+                'pageLastId': '1',
+                'orderGroupCode': '',
+                'pageSize': '20'
+              },
+              CarrySignJS.NewSign,
+              callback);
         },
 
         // 获取消息 Created by :jiangshunbin
@@ -157,25 +159,66 @@ var CarryAPI = CarryAPI || (function () {
         },
 
         /**
+         * 获取验证码 （登录 / 第三方绑定 / 用户修改提现密码）
+         * ：wangwenqi
+         */
+        getVerifyCode: function (parameter, callback) {
+          var path = '/sms/sendSms';
+          CarryHttp.doPost(path,
+            {
+              'mobilePhone': parameter.mobilePhone, // 手机号
+              'type': parameter.type
+            },
+            null,
+            callback);
+        },
+
+        /**
          * 三方绑定 旧签名 
          * :wangwenqi
          */
-        bindPhone: function (mobilePhone, code, snsUid, snsType, snsNickName, snsHeadPhoto, terminalDef, deviceKind, deviceId,callback) {
+        bindPhone: function (parameter, callback) {
           var path = '/sns/bindMobile1';
-          CarryHttp.doGet(path,
+          CarryHttp.doPost(path,
             {
-              'mobilePhone':'', // 手机号
-              'code': '', // 验证码
-              'snsUid': '', // 第三方唯一标识
-              'snsType': '', // 第三方登录类型.weixin,qq,weibo
-              'snsNickName': '', // 第三方昵称
-              'snsHeadPhoto': '', // 第三方头像
-              'terminalDef': '', // 终端程序名
-              'deviceKind': '', // 设备类型，ios或者android或者pc
-              'deviceId': '' // 设备ID
+              'mobilePhone': parameter.mobilePhone, // 手机号
+              'code': parameter.code, // 验证码
+              'snsUid': parameter.snsUid, // 第三方唯一标识
+              'snsType': 'weixin', // 第三方登录类型.weixin,qq,weibo
+              'snsNickName': parameter.snsNickName, // 第三方昵称
+              'snsHeadPhoto': parameter.snsHeadPhoto, // 第三方头像
+              'terminalDef': commonData.terminalDef, // 终端程序名
+              'deviceKind': commonData.deviceType, // 设备类型，ios或者android或者pc
+              'deviceId': commonData.deviceId // 设备ID
             },
-            CarrySignJS.OldSign,
-            callback);
+            null,
+            {
+              onSuccess(data) {
+                // console.log(data);
+                if (util.isNullObj(data.userInfo)) {
+                  // wx.showModal({
+                  //     title: '请绑定手机',
+                  //     content: '需要绑定手机',
+                  // })
+                  wx.navigateTo({
+                    url: '/pages/bind_phone/bind_phone',
+                  })
+                } else {
+                  globalData.userInfo = data.userInfo;
+                  commonData.loginUserId = data.userInfo.loginUserId;
+                  commonData.token = data.userInfo.token;
+
+                  if (callback) {
+                    callback.onSuccess(data);
+                  }
+                }
+              },
+              onFail(err) {
+                if (callback) {
+                  callback.onFail(err);
+                }
+              }
+            });
         },
     }
 

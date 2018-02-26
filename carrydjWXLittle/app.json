@@ -4,7 +4,8 @@
     "pages/bind_phone/bind_phone",
     "pages/index1/index",
     "pages/logs/logs",
-    "pages/webpage/webpage"
+    "pages/webpage/webpage",
+    "pages/order_form/order_form"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -20,6 +21,12 @@
         {
             "pagePath": "pages/index/index",
             "text": "约伴",
+            "iconPath": "images/tabbar/activity_icon_bubbles_normal.png",
+            "selectedIconPath": "images/tabbar/activity_icon_bubbles_pressed.png"
+        },
+        {
+            "pagePath": "pages/order_form/order_form",
+            "text": "订单",
             "iconPath": "images/tabbar/activity_icon_bubbles_normal.png",
             "selectedIconPath": "images/tabbar/activity_icon_bubbles_pressed.png"
         },
